@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>織成 - デジタルを、心で織り成す。| ウェブサイト制作・SEO・ロゴデザイン</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        /* Custom styles for animations and colors */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap');
+        
+        :root {
+            --color-primary: #1A4B7D; /* Indigo Blue */
+            --color-cta: #D32F2F;    /* Vermilion Red */
+            --color-background-light: #E8ECEF; /* Light Grey */
+            --color-success: #4CAF50; /* Evergreen Green */
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', 'Inter', sans-serif;
+            background-color: var(--color-background-light);
+            scroll-behavior: smooth;
+        }
+
+        /* Utility for Page Switching */
+        .page-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .page-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Keyframe for subtle floating animation on the hero logo */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Custom animation for element entrance */
+        .animate-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .animate-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            background-color: #C62828; /* Slightly darker red on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Tailwind CSS required script for Inter font and utility classes -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-indigo': 'var(--color-primary)',
+                        'cta-red': 'var(--color-cta)',
+                        'bg-light': 'var(--color-background-light)',
+                        'success-green': 'var(--color-success)',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <!-- Logo placeholder - Use the uploaded logo here -->
+                    <img src="uploaded:Gemini_Generated_Image_sn0n9bsn0n9bsn0n.jpg-630778f7-de30-4deb-b879-e256bb170672" alt="織成 Orinashi Logo" class="h-10 w-auto">
+                    <span class="text-2xl font-bold text-primary-indigo">織成</span>
+                </div>
+                <div class="hidden md:flex space-x-6 text-lg font-medium">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="home">トップページ</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="services">サービス</a>
+                    <a href="#cases" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="cases">制作実績</a>
+                    <a href="#pricing" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="pricing">料金</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="about">会社概要</a>
+                </div>
+                <a href="#contact" class="hidden md:block btn-contact px-4 py-2 bg-cta-red text-white font-semibold rounded-lg shadow-md hover:opacity-90 transition-opacity" data-page="contact">お問い合わせ</a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </nav>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-inner">
+            <a href="#home" class="nav-link block px-4 py-3 text-gray-700 hover:bg-bg-light transition-colors" data-page="home">トップページ</a>
+            <a href="#services" class="nav-link block px-4 py-3 text-gray-700 hover:bg-bg-light transition-colors" data-page="services">サービス</a>
+            <a href="#cases" class="nav-link block px-4 py-3 text-gray-700 hover:bg-bg-light transition-colors" data-page="cases">制作実績</a>
+            <a href="#pricing" class="nav-link block px-4 py-3 text-gray-700 hover:bg-bg-light transition-colors" data-page="pricing">料金</a>
+            <a href="#about" class="nav-link block px-4 py-3 text-gray-700 hover:bg-bg-light transition-colors" data-page="about">会社概要</a>
+            <a href="#contact" class="nav-link block px-4 py-3 bg-cta-red text-white font-semibold hover:bg-opacity-90 transition-opacity" data-page="contact">お問い合わせ</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- HOME PAGE (トップページ) -->
+            <section id="home-page" data-page="home" class="page-content active">
+                <div class="text-center py-16 bg-white rounded-xl shadow-lg mb-12">
+                    <div class="w-32 h-32 mx-auto mb-6 float-animation">
+                         <!-- Logo (Repeated for Hero Section) -->
+                        <img src="uploaded:Gemini_Generated_Image_sn0n9bsn0n9bsn0n.jpg-630778f7-de30-4deb-b879-e256bb170672" alt="織成 Orinashi Logo" class="w-full h-full object-contain">
+                    </div>
+                    <h1 class="text-5xl font-extrabold text-primary-indigo mb-4 animate-in">
+                        デジタルを、心で織り成す。
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 animate-in" style="transition-delay: 0.1s;">
+                        お客様のビジネスの成長を支える、確かなウェブソリューションを提供します。
+                    </p>
+                    <a href="#services" class="nav-link cta-button px-8 py-3 text-xl bg-primary-indigo text-white font-bold rounded-full transition-colors animate-in" style="transition-delay: 0.2s;" data-page="services">
+                        サービスを見る
+                    </a>
+                </div>
+
+                <!-- Feature Grid Section -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in">
+                        <i class="fas fa-desktop text-4xl text-cta-red mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">完全オーダーメイド</h3>
+                        <p class="text-gray-500 text-sm">お客様の要望を完全に実現するカスタム制作。</p>
+                    </div>
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.1s;">
+                        <i class="fas fa-search-dollar text-4xl text-cta-red mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">集客に強いSEO</h3>
+                        <p class="text-gray-500 text-sm">検索エンジンに評価される効果的な内部対策。</p>
+                    </div>
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.2s;">
+                        <i class="fas fa-palette text-4xl text-cta-red mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">プロのロゴデザイン</h3>
+                        <p class="text-gray-500 text-sm">ブランドイメージを確立する高品質なデザイン。</p>
+                    </div>
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.3s;">
+                        <i class="fas fa-users-cog text-4xl text-cta-red mb-3"></i>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">万全のサポート体制</h3>
+                        <p class="text-gray-500 text-sm">公開後の運用、保守、改善を継続的にサポート。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SERVICES PAGE (サービス) -->
+            <section id="services-page" data-page="services" class="page-content py-12">
+                <h2 class="text-4xl font-bold text-primary-indigo text-center mb-10 animate-in">当社の主要サービス</h2>
+                <p class="text-center text-lg text-gray-600 mb-12 animate-in" style="transition-delay: 0.1s;">
+                    お客様のビジネスフェーズに合わせた最適なソリューションをご提供します。
+                </p>
+
+                <!-- Service 1: Web Site Creation -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in">
+                    <div class="md:w-1/3 text-center md:text-left md:pr-8">
+                        <i class="fas fa-code text-5xl text-primary-indigo mb-4"></i>
+                        <h3 class="text-2xl font-bold text-primary-indigo mb-2">ウェブサイト制作</h3>
+                        <span class="inline-block bg-primary-indigo/10 text-primary-indigo text-xs font-semibold px-3 py-1 rounded-full">CORE SERVICE</span>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <p class="text-gray-700 mb-4">
+                            集客力とデザイン性を両立したプロフェッショナルなサイトを制作します。コーポレートサイト、採用サイト、ランディングページなど、目的とターゲットに最適化された構成をご提案します。
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>完全オーダーメイドデザイン</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>全デバイス対応レスポンシブデザイン</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>WordPress等のCMS構築</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 2: SEO & Digital Strategy -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in" style="transition-delay: 0.1s;">
+                    <div class="md:w-1/3 text-center md:text-left md:pr-8">
+                        <i class="fas fa-chart-line text-5xl text-primary-indigo mb-4"></i>
+                        <h3 class="text-2xl font-bold text-primary-indigo mb-2">SEO・デジタル戦略</h3>
+                        <span class="inline-block bg-primary-indigo/10 text-primary-indigo text-xs font-semibold px-3 py-1 rounded-full">GROWTH</span>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <p class="text-gray-700 mb-4">
+                            制作段階から検索エンジン最適化を組み込み、持続的なアクセスと集客を実現します。キーワード選定からコンテンツ戦略まで、包括的にサポートします。
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>キーワード・競合分析</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>内部構造の最適化（テクニカルSEO）</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>アクセス解析に基づく改善提案</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service 3: Logo Design & Branding -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in" style="transition-delay: 0.2s;">
+                    <div class="md:w-1/3 text-center md:text-left md:pr-8">
+                        <i class="fas fa-lightbulb text-5xl text-primary-indigo mb-4"></i>
+                        <h3 class="text-2xl font-bold text-primary-indigo mb-2">ロゴ・ブランディング</h3>
+                        <span class="inline-block bg-primary-indigo/10 text-primary-indigo text-xs font-semibold px-3 py-1 rounded-full">IDENTITY</span>
+                    </div>
+                    <div class="md:w-2/3 mt-4 md:mt-0">
+                        <p class="text-gray-700 mb-4">
+                            お客様の理念を深く理解し、視覚的に表現するロゴとブランドガイドラインを制作します。ウェブサイトとの一貫性を重視し、信頼性を高めます。
+                        </p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 ml-4">
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>ブランドコンセプトの策定</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>商標登録を考慮したオリジナルロゴデザイン</li>
+                            <li><i class="fas fa-check-circle text-success-green mr-2"></i>名刺、パンフレット等への展開サポート</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- GEMINI API INTEGRATION: Strategy Assistant -->
+                <div class="strategy-assistant mt-16 p-8 bg-primary-indigo/10 rounded-xl shadow-inner animate-in" style="transition-delay: 0.3s;">
+                    <h3 class="text-3xl font-extrabold text-primary-indigo text-center mb-6 flex items-center justify-center space-x-3">
+                        <i class="fas fa-magic text-cta-red"></i> 
+                        <span class="text-cta-red">✨</span>ビジネス戦略アシスタント<span class="text-cta-red">✨</span>
+                        <i class="fas fa-magic text-cta-red"></i>
+                    </h3>
+                    <p class="text-center text-gray-700 mb-8">
+                        あなたのビジネス情報を入力して、AIによる**ブランドキャッチコピー**と**SEOキーワード**のアイデアを無料で受け取りましょう。
+                    </p>
+
+                    <form id="strategy-form" class="space-y-4 max-w-lg mx-auto">
+                        <div>
+                            <label for="industry" class="block text-sm font-medium text-gray-700 mb-1">あなたの業界 (例: 地域密着型カフェ、製造業、B2B SaaS)</label>
+                            <input type="text" id="industry" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo" placeholder="例: 健康食品ECサイト">
+                        </div>
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">サービスの特徴・強み</label>
+                            <textarea id="description" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo" placeholder="例: 無農薬の野菜のみを使用、独自の調理法、オンライン予約可能"></textarea>
+                        </div>
+                        <button type="submit" id="generate-button" class="w-full cta-button px-4 py-3 bg-cta-red text-white font-bold rounded-lg text-lg flex items-center justify-center">
+                            <i class="fas fa-rocket mr-2"></i> 戦略を生成する
+                        </button>
+                    </form>
+
+                    <div id="strategy-results" class="hidden mt-8 p-6 bg-white rounded-xl shadow-md border-2 border-primary-indigo">
+                        <h4 class="text-xl font-bold text-primary-indigo mb-4">✨ AI提案結果</h4>
+                        <div id="loading-indicator" class="hidden text-center text-primary-indigo font-semibold py-4">
+                            <i class="fas fa-spinner fa-spin mr-2"></i> 生成中です。少々お待ちください...
+                        </div>
+                        <div id="result-slogan" class="mb-4">
+                            <p class="font-semibold text-gray-700 border-b pb-1 mb-2">キャッチコピー案:</p>
+                            <p class="text-2xl font-extrabold text-cta-red pl-2" id="slogan-output"></p>
+                        </div>
+                        <div id="result-keywords">
+                            <p class="font-semibold text-gray-700 border-b pb-1 mb-2">主要SEOキーワード案 (5点):</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 pl-4" id="keywords-output"></ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- END GEMINI INTEGRATION -->
+
+                <div class="text-center mt-10 animate-in" style="transition-delay: 0.4s;">
+                    <a href="#contact" class="nav-link cta-button px-8 py-3 text-xl bg-cta-red text-white font-bold rounded-full transition-colors" data-page="contact">
+                        専門家に相談する
+                    </a>
+                </div>
+            </section>
+
+            <!-- CASE STUDIES PAGE (制作実績) -->
+            <section id="cases-page" data-page="cases" class="page-content py-12">
+                <h2 class="text-4xl font-bold text-primary-indigo text-center mb-10 animate-in">私たちの制作実績</h2>
+                <p class="text-center text-lg text-gray-600 mb-12 animate-in" style="transition-delay: 0.1s;">
+                    「織成」がお客様と共に「織り成した」成功事例をご覧ください。
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Case 1 -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
+                            <!-- Placeholder Image -->
+                            <img src="https://placehold.co/400x300/1A4B7D/FFFFFF?text=Corporate+Site" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/1A4B7D/FFFFFF?text=Corporate+Site';" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-primary-indigo bg-primary-indigo/10 px-2 py-1 rounded-full">コーポレート</span>
+                            <h4 class="text-xl font-bold mt-2 mb-2">老舗企業のブランディング刷新</h4>
+                            <p class="text-gray-600 text-sm">伝統と革新を両立させた、信頼性の高いデザインとCMSを導入。</p>
+                            <a href="#" class="text-cta-red hover:text-primary-indigo transition-colors mt-3 inline-block font-semibold">詳細を見る →</a>
+                        </div>
+                    </div>
+                    <!-- Case 2 -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in" style="transition-delay: 0.1s;">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
+                            <!-- Placeholder Image -->
+                            <img src="https://placehold.co/400x300/D32F2F/FFFFFF?text=EC+Site" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/D32F2F/FFFFFF?text=EC+Site';" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-cta-red bg-cta-red/10 px-2 py-1 rounded-full">ECサイト</span>
+                            <h4 class="text-xl font-bold mt-2 mb-2">地域特産品のオンライン販売強化</h4>
+                            <p class="text-gray-600 text-sm">ShopifyカスタマイズとSEOで売上200%アップに貢献。</p>
+                            <a href="#" class="text-cta-red hover:text-primary-indigo transition-colors mt-3 inline-block font-semibold">詳細を見る →</a>
+                        </div>
+                    </div>
+                    <!-- Case 3 -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in" style="transition-delay: 0.2s;">
+                        <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
+                            <!-- Placeholder Image -->
+                            <img src="https://placehold.co/400x300/4CAF50/FFFFFF?text=Recruitment+LP" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/4CAF50/FFFFFF?text=Recruitment+LP';" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-semibold text-success-green bg-success-green/10 px-2 py-1 rounded-full">採用・LP</span>
+                            <h4 class="text-xl font-bold mt-2 mb-2">採用応募率向上ランディングページ</h4>
+                            <p class="text-gray-600 text-sm">応募者のペルソナに基づいたデザインで、CVRを大幅改善。</p>
+                            <a href="#" class="text-cta-red hover:text-primary-indigo transition-colors mt-3 inline-block font-semibold">詳細を見る →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRICING PAGE (料金) -->
+            <section id="pricing-page" data-page="pricing" class="page-content py-12">
+                <h2 class="text-4xl font-bold text-primary-indigo text-center mb-10 animate-in">料金プラン</h2>
+                <p class="text-center text-lg text-gray-600 mb-12 animate-in" style="transition-delay: 0.1s;">
+                    透明性の高いシンプルな料金体系で、お客様の予算と目的に応じてお選びいただけます。
+                </p>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Basic Plan -->
+                    <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-t-4 border-primary-indigo animate-in">
+                        <h3 class="text-2xl font-bold text-primary-indigo mb-2">ベーシックプラン</h3>
+                        <p class="text-sm text-gray-500 mb-4">情報発信の第一歩を踏み出す方へ</p>
+                        <p class="text-4xl font-extrabold text-gray-900 mb-6">
+                            ¥350,000<span class="text-lg font-medium text-gray-500">〜 (税別)</span>
+                        </p>
+                        <ul class="space-y-3 text-gray-700 mb-8">
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>基本5ページ構成</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>テンプレートベースデザイン</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>レスポンシブ対応</li>
+                            <li><i class="fas fa-times-circle text-gray-400 mr-2"></i>CMS (別途費用)</li>
+                            <li><i class="fas fa-times-circle text-gray-400 mr-2"></i>詳細SEO戦略</li>
+                        </ul>
+                        <a href="#contact" class="nav-link w-full block text-center cta-button px-6 py-3 bg-primary-indigo text-white font-bold rounded-lg hover:opacity-90" data-page="contact">このプランで相談する</a>
+                    </div>
+
+                    <!-- Standard Plan (Recommended) -->
+                    <div class="pricing-card bg-white p-8 rounded-xl shadow-2xl ring-4 ring-cta-red/50 transform scale-105 animate-in" style="transition-delay: 0.1s;">
+                        <span class="block text-center text-xs font-bold text-white bg-cta-red rounded-full py-1 mb-4">RECOMMENDED</span>
+                        <h3 class="text-2xl font-bold text-cta-red mb-2">スタンダードプラン</h3>
+                        <p class="text-sm text-gray-500 mb-4">集客とブランディングを重視する中小企業向け</p>
+                        <p class="text-5xl font-extrabold text-gray-900 mb-6">
+                            ¥800,000<span class="text-lg font-medium text-gray-500">〜 (税別)</span>
+                        </p>
+                        <ul class="space-y-3 text-gray-700 mb-8">
+                            <li><i class="fas fa-check-circle text-cta-red mr-2"></i>オリジナルデザイン制作</li>
+                            <li><i class="fas fa-check-circle text-cta-red mr-2"></i>**WordPress CMS構築**</li>
+                            <li><i class="fas fa-check-circle text-cta-red mr-2"></i>レスポンシブ対応・**内部SEO対策込み**</li>
+                            <li><i class="fas fa-check-circle text-cta-red mr-2"></i>初期アクセス解析設定</li>
+                            <li><i class="fas fa-times-circle text-gray-400 mr-2"></i>ロゴデザイン (別途費用)</li>
+                        </ul>
+                        <a href="#contact" class="nav-link w-full block text-center cta-button px-6 py-3 bg-cta-red text-white font-bold rounded-lg hover:opacity-90" data-page="contact">詳細について問い合わせる</a>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-t-4 border-primary-indigo animate-in" style="transition-delay: 0.2s;">
+                        <h3 class="text-2xl font-bold text-primary-indigo mb-2">プレミアムプラン</h3>
+                        <p class="text-sm text-gray-500 mb-4">全てを任せたい、本格的なデジタル戦略を望む方へ</p>
+                        <p class="text-4xl font-extrabold text-gray-900 mb-6">
+                            ¥1,500,000<span class="text-lg font-medium text-gray-500">〜 (税別)</span>
+                        </p>
+                        <ul class="space-y-3 text-gray-700 mb-8">
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>**フルカスタムデザイン＆機能開発**</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>CMS/ECサイト構築</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>**オリジナルロゴデザイン込み**</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>コンテンツ企画・ライティングサポート</li>
+                            <li><i class="fas fa-check-circle text-primary-indigo mr-2"></i>公開後6ヶ月間保守サポート込み</li>
+                        </ul>
+                        <a href="#contact" class="nav-link w-full block text-center cta-button px-6 py-3 bg-primary-indigo text-white font-bold rounded-lg hover:opacity-90" data-page="contact">プレミアム相談を予約する</a>
+                    </div>
+                </div>
+
+                <div class="mt-12 p-6 bg-white rounded-xl shadow-md animate-in" style="transition-delay: 0.3s;">
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">月額保守サポート（オプション）</h4>
+                    <p class="text-gray-600">サイト公開後も安心してお任せください。セキュリティ更新、コンテンツ修正、技術サポートを提供します。</p>
+                    <p class="text-2xl font-extrabold text-primary-indigo mt-3">¥15,000 / 月〜</p>
+                </div>
+            </section>
+
+            <!-- ABOUT US PAGE (会社概要) -->
+            <section id="about-page" data-page="about" class="page-content py-12">
+                <h2 class="text-4xl font-bold text-primary-indigo text-center mb-10 animate-in">会社概要・理念</h2>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-3xl font-bold text-cta-red mb-4 border-b pb-2">「織成」の理念</h3>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed animate-in">
+                        私たちの社名「織成」が示す通り、お客様のビジネス目標（糸）と、私たちのデザイン・技術（織機）を丁寧に組み合わせ、**市場で勝ち抜くための確かなデジタル資産**を「織り成す」ことを使命としています。単なるウェブサイトの制作ではなく、成長のための戦略的パートナーとして伴走します。
+                    </p>
+
+                    <h3 class="text-3xl font-bold text-primary-indigo mb-4 border-b pb-2 mt-8 animate-in" style="transition-delay: 0.1s;">
+                        会社情報
+                    </h3>
+                    <div class="space-y-3 text-gray-700 animate-in" style="transition-delay: 0.2s;">
+                        <p class="flex items-center">
+                            <i class="fas fa-building text-primary-indigo w-8"></i> 
+                            <span class="font-semibold w-24">会社名:</span> 織成 (Orinashi)
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary-indigo w-8"></i>
+                            <span class="font-semibold w-24">所在地:</span> 〇〇県〇〇市 (架空の住所)
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-users text-primary-indigo w-8"></i> 
+                            <span class="font-semibold w-24">代表者:</span> 〇〇 〇〇
+                        </p>
+                        <p class="flex items-center">
+                            <i class="fas fa-envelope text-primary-indigo w-8"></i> 
+                            <span class="font-semibold w-24">E-mail:</span> contact@orinashi-web.jp
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT PAGE (お問い合わせ) -->
+            <section id="contact-page" data-page="contact" class="page-content py-12">
+                <h2 class="text-4xl font-bold text-primary-indigo text-center mb-10 animate-in">お問い合わせ・無料相談</h2>
+                <p class="text-center text-lg text-gray-600 mb-12 animate-in" style="transition-delay: 0.1s;">
+                    まずはお客様の現状と目標をお聞かせください。専門のコンサルタントが無料で最適なプランをご提案します。
+                </p>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg max-w-2xl mx-auto animate-in" style="transition-delay: 0.2s;">
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">お名前 <span class="text-cta-red">*</span></label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">会社名 / 屋号</label>
+                            <input type="text" id="company" name="company" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">メールアドレス <span class="text-cta-red">*</span></label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo">
+                        </div>
+                        <div>
+                            <label for="inquiry" class="block text-sm font-medium text-gray-700 mb-1">お問い合わせ内容 <span class="text-cta-red">*</span></label>
+                            <textarea id="inquiry" name="inquiry" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-indigo focus:border-primary-indigo"></textarea>
+                        </div>
+                        <button type="submit" class="w-full cta-button px-4 py-3 bg-cta-red text-white font-bold rounded-lg text-lg">
+                            送信する
+                        </button>
+                    </form>
+                    
+                    <!-- Submission Message Box (Custom Alert) -->
+                    <div id="submission-message" class="hidden mt-6 p-4 rounded-lg text-center font-semibold bg-success-green text-white">
+                        お問い合わせありがとうございます。内容を確認後、2営業日以内にご連絡差し上げます。
+                    </div>
+
+                    <p class="text-center text-sm text-gray-500 mt-6">
+                        プライバシーポリシーはこちらからご確認いただけます。
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-indigo text-white mt-12 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-white/20 pb-4 mb-4">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center justify-center space-x-2 text-2xl font-bold">
+                        <!-- Footer Logo -->
+                        <img src="uploaded:Gemini_Generated_Image_sn0n9bsn0n9bsn0n.jpg-630778f7-de30-4deb-b879-e256bb170672" alt="織成 Orinashi Logo" class="h-8 w-auto filter brightness-150">
+                        <span>織成</span>
+                    </div>
+                    <p class="text-sm mt-1">デジタルを、心で織り成す。</p>
+                </div>
+                <div class="space-x-4 text-sm">
+                    <a href="#about" class="nav-link hover:text-cta-red transition-colors" data-page="about">会社概要</a>
+                    <a href="#" class="hover:text-cta-red transition-colors">プライバシーポリシー</a>
+                    <a href="#contact" class="nav-link hover:text-cta-red transition-colors" data-page="contact">採用情報</a>
+                </div>
+            </div>
+            <p class="text-sm text-white/70">© 2024 Orinashi. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Configuration
+        const API_KEY = ""; 
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+        
+        // System prompt to ensure Japanese marketing focus
+        const SYSTEM_PROMPT = "あなたは日本のウェブマーケティングのプロフェッショナルです。ユーザーから提供された業界とサービスの特徴に基づき、日本の顧客に響く、魅力的なキャッチコピー（スローガン）と、集客に効果的な日本語のSEOキーワード5つを提案してください。回答は指定されたJSONスキーマに従ってください。";
+
+        /**
+         * Fetches content from the Gemini API with exponential backoff.
+         * @param {object} payload - The request payload.
+         * @param {number} retries - Current retry count.
+         * @returns {Promise<object>} The API response JSON.
+         */
+        async function fetchWithBackoff(payload, retries = 0) {
+            const maxRetries = 5;
+            const delay = Math.pow(2, retries) * 1000 + Math.random() * 1000;
+            
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    if (response.status === 429 && retries < maxRetries) {
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        return fetchWithBackoff(payload, retries + 1);
+                    }
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+                return response.json();
+
+            } catch (error) {
+                if (retries < maxRetries) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(payload, retries + 1);
+                }
+                throw new Error("Gemini API call failed after multiple retries.");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const contactForm = document.getElementById('contactForm');
+            const submissionMessage = document.getElementById('submission-message');
+
+            // Gemini Feature Elements
+            const strategyForm = document.getElementById('strategy-form');
+            const industryInput = document.getElementById('industry');
+            const descriptionInput = document.getElementById('description');
+            const resultsDiv = document.getElementById('strategy-results');
+            const loadingIndicator = document.getElementById('loading-indicator');
+            const sloganOutput = document.getElementById('slogan-output');
+            const keywordsOutput = document.getElementById('keywords-output');
+            const generateButton = document.getElementById('generate-button');
+
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Page Routing Logic ---
+            const switchPage = (targetPageId) => {
+                pageContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                const targetPage = document.getElementById(`${targetPageId}-page`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    // Hide mobile menu on link click
+                    mobileMenu.classList.add('hidden'); 
+                    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+                }
+            };
+
+            // Initial page load based on URL hash
+            const initialHash = window.location.hash.substring(1) || 'home';
+            switchPage(initialHash);
+
+            // Click listener for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPageId = link.getAttribute('data-page');
+                    // Update URL hash without causing a page reload
+                    window.history.pushState(null, null, `#${targetPageId}`);
+                    switchPage(targetPageId);
+                });
+            });
+
+            // Handle back/forward browser buttons
+            window.addEventListener('popstate', () => {
+                const hash = window.location.hash.substring(1) || 'home';
+                switchPage(hash);
+            });
+
+
+            // --- Contact Form Submission Handler (Simulated) ---
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // 1. Hide form
+                contactForm.style.display = 'none';
+
+                // 2. Show success message (using custom div instead of alert())
+                submissionMessage.classList.remove('hidden');
+
+                // 3. Clear form fields after 3 seconds and reset view
+                setTimeout(() => {
+                    contactForm.reset();
+                    submissionMessage.classList.add('hidden');
+                    contactForm.style.display = 'block';
+                }, 5000);
+            });
+
+            // --- Gemini Strategy Assistant Logic ---
+            strategyForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const industry = industryInput.value.trim();
+                const description = descriptionInput.value.trim();
+
+                if (!industry || !description) {
+                    alert('業界とサービスの特徴を入力してください。'); // Using JS alert here as a temporary form validation message
+                    return;
+                }
+
+                // UI State: Show loading, reset previous results
+                resultsDiv.classList.remove('hidden');
+                loadingIndicator.classList.remove('hidden');
+                sloganOutput.textContent = '';
+                keywordsOutput.innerHTML = '';
+                generateButton.disabled = true;
+                generateButton.textContent = '生成中...';
+
+                const userQuery = `業界: ${industry}, サービスの特徴: ${description}`;
+                
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "slogan": { "type": "STRING", description: "日本の顧客に響く魅力的なキャッチコピーを簡潔に一つ提案してください。" },
+                                "keywords": {
+                                    "type": "ARRAY",
+                                    "items": { "type": "STRING" },
+                                    description: "集客に効果的な日本語のSEOキーワードを5つ提案してください。"
+                                }
+                            }
+                        }
+                    }
+                };
+
+                try {
+                    const result = await fetchWithBackoff(payload);
+                    const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (jsonText) {
+                        const parsedJson = JSON.parse(jsonText);
+                        
+                        sloganOutput.textContent = parsedJson.slogan || '生成に失敗しました。';
+                        keywordsOutput.innerHTML = ''; // Clear previous
+
+                        if (parsedJson.keywords && Array.isArray(parsedJson.keywords)) {
+                            parsedJson.keywords.forEach(keyword => {
+                                const li = document.createElement('li');
+                                li.textContent = keyword;
+                                keywordsOutput.appendChild(li);
+                            });
+                        }
+                    } else {
+                        sloganOutput.textContent = '回答の解析中にエラーが発生しました。';
+                    }
+
+                } catch (error) {
+                    sloganOutput.textContent = '通信エラーが発生しました。時間を置いて再度お試しください。';
+                    console.error('Gemini API Error:', error);
+
+                } finally {
+                    // UI State: Hide loading, enable button
+                    loadingIndicator.classList.add('hidden');
+                    generateButton.disabled = false;
+                    generateButton.innerHTML = '<i class="fas fa-rocket mr-2"></i> 戦略を生成する';
+                }
+            });
+
+            // --- Scroll Animation Logic (Intersection Observer) ---
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        // Optional: Reset animation when scrolling away
+                        // entry.target.classList.remove('visible'); 
+                    }
+                });
+            }, { 
+                threshold: 0.1, // Trigger when 10% of the item is visible
+                rootMargin: "0px 0px -50px 0px" // Slightly delay trigger until element is clearly coming into view
+            });
+
+            // Target elements for the animation
+            document.querySelectorAll('.animate-in').forEach(element => {
+                observer.observe(element);
+            });
+
+            document.querySelectorAll('.feature-card, .service-block, .case-card, .pricing-card, .strategy-assistant').forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
