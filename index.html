@@ -70,6 +70,12 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             background-color: #C62828; /* Slightly darker red on hover */
         }
+
+        /* BASE STYLES for Service/Feature Hover Animation */
+        .service-block, .feature-card, .case-card {
+            transition: all 0.3s ease;
+            cursor: pointer; /* カーソルをポインターに変更 */
+        }
     </style>
 </head>
 <body>
@@ -93,11 +99,12 @@
     <header class="sticky top-0 z-50 bg-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-2">
+                <!-- LOGO and NAME: Now wrapped in an anchor tag linking to #home -->
+                <a href="#home" class="nav-link flex items-center space-x-2" data-page="home">
                     <!-- Logo placeholder - PATH UPDATED to logo.png -->
                     <img src="./logo.png" alt="織成 Orinashi Logo" class="h-10 w-auto">
                     <span class="text-2xl font-bold text-primary-indigo">織成</span>
-                </div>
+                </a>
                 <div class="hidden md:flex space-x-6 text-lg font-medium">
                     <a href="#home" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="home">トップページ</a>
                     <a href="#services" class="nav-link text-gray-700 hover:text-primary-indigo transition-colors" data-page="services">サービス</a>
@@ -148,22 +155,26 @@
 
                 <!-- Feature Grid Section -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in">
+                    <!-- Animation added to feature-card -->
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.03] cursor-pointer">
                         <i class="fas fa-desktop text-4xl text-cta-red mb-3"></i>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">完全オーダーメイド</h3>
                         <p class="text-gray-500 text-sm">お客様の要望を完全に実現するカスタム制作。</p>
                     </div>
-                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.1s;">
+                    <!-- Animation added to feature-card -->
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.03] cursor-pointer" style="transition-delay: 0.1s;">
                         <i class="fas fa-search-dollar text-4xl text-cta-red mb-3"></i>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">集客に強いSEO</h3>
                         <p class="text-gray-500 text-sm">検索エンジンに評価される効果的な内部対策。</p>
                     </div>
-                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.2s;">
+                    <!-- Animation added to feature-card -->
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.03] cursor-pointer" style="transition-delay: 0.2s;">
                         <i class="fas fa-palette text-4xl text-cta-red mb-3"></i>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">プロのロゴデザイン</h3>
                         <p class="text-gray-500 text-sm">ブランドイメージを確立する高品質なデザイン。</p>
                     </div>
-                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in" style="transition-delay: 0.3s;">
+                    <!-- Animation added to feature-card -->
+                    <div class="feature-card bg-white p-6 rounded-xl shadow-md text-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.03] cursor-pointer" style="transition-delay: 0.3s;">
                         <i class="fas fa-users-cog text-4xl text-cta-red mb-3"></i>
                         <h3 class="text-xl font-semibold text-gray-800 mb-2">万全のサポート体制</h3>
                         <p class="text-gray-500 text-sm">公開後の運用、保守、改善を継続的にサポート。</p>
@@ -178,8 +189,8 @@
                     お客様のビジネスフェーズに合わせた最適なソリューションをご提供します。
                 </p>
 
-                <!-- Service 1: Web Site Creation -->
-                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in">
+                <!-- Service 1: Web Site Creation - Animation added -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer">
                     <div class="md:w-1/3 text-center md:text-left md:pr-8">
                         <i class="fas fa-code text-5xl text-primary-indigo mb-4"></i>
                         <h3 class="text-2xl font-bold text-primary-indigo mb-2">ウェブサイト制作</h3>
@@ -198,8 +209,8 @@
                     </div>
                 </div>
 
-                <!-- Service 2: SEO & Digital Strategy -->
-                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in" style="transition-delay: 0.1s;">
+                <!-- Service 2: SEO & Digital Strategy - Animation added -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer" style="transition-delay: 0.1s;">
                     <div class="md:w-1/3 text-center md:text-left md:pr-8">
                         <i class="fas fa-chart-line text-5xl text-primary-indigo mb-4"></i>
                         <h3 class="text-2xl font-bold text-primary-indigo mb-2">SEO・デジタル戦略</h3>
@@ -218,8 +229,8 @@
                     </div>
                 </div>
 
-                <!-- Service 3: Logo Design & Branding -->
-                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in" style="transition-delay: 0.2s;">
+                <!-- Service 3: Logo Design & Branding - Animation added -->
+                <div class="service-block bg-white p-8 rounded-xl shadow-lg mb-8 md:flex md:items-center animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer" style="transition-delay: 0.2s;">
                     <div class="md:w-1/3 text-center md:text-left md:pr-8">
                         <i class="fas fa-lightbulb text-5xl text-primary-indigo mb-4"></i>
                         <h3 class="text-2xl font-bold text-primary-indigo mb-2">ロゴ・ブランディング</h3>
@@ -295,8 +306,8 @@
                 </p>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Case 1 -->
-                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in">
+                    <!-- Case 1 - Animation added -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer">
                         <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
                             <!-- Placeholder Image -->
                             <img src="https://placehold.co/400x300/1A4B7D/FFFFFF?text=Corporate+Site" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/1A4B7D/FFFFFF?text=Corporate+Site';" class="w-full h-full object-cover">
@@ -308,8 +319,8 @@
                             <a href="#" class="text-cta-red hover:text-primary-indigo transition-colors mt-3 inline-block font-semibold">詳細を見る →</a>
                         </div>
                     </div>
-                    <!-- Case 2 -->
-                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in" style="transition-delay: 0.1s;">
+                    <!-- Case 2 - Animation added -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer" style="transition-delay: 0.1s;">
                         <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
                             <!-- Placeholder Image -->
                             <img src="https://placehold.co/400x300/D32F2F/FFFFFF?text=EC+Site" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/D32F2F/FFFFFF?text=EC+Site';" class="w-full h-full object-cover">
@@ -321,8 +332,8 @@
                             <a href="#" class="text-cta-red hover:text-primary-indigo transition-colors mt-3 inline-block font-semibold">詳細を見る →</a>
                         </div>
                     </div>
-                    <!-- Case 3 -->
-                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in" style="transition-delay: 0.2s;">
+                    <!-- Case 3 - Animation added -->
+                    <div class="case-card bg-white rounded-xl shadow-lg overflow-hidden animate-in transition duration-300 hover:shadow-xl hover:scale-[1.01] cursor-pointer" style="transition-delay: 0.2s;">
                         <div class="h-48 bg-gray-300 flex items-center justify-center text-gray-600 font-bold">
                             <!-- Placeholder Image -->
                             <img src="https://placehold.co/400x300/4CAF50/FFFFFF?text=Recruitment+LP" alt="制作実績イメージ" onerror="this.onerror=null;this.src='https://placehold.co/400x300/4CAF50/FFFFFF?text=Recruitment+LP';" class="w-full h-full object-cover">
